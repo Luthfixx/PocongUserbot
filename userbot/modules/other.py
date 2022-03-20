@@ -217,12 +217,12 @@ async def _(event):
     web = BYPASS_URL
     async with event.client.conversation(web) as conv:
         try:
-            msg = await conv.send_message(d_link)
+            await conv.send_message(d_link)
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.client(UnblockRequest(web))
-            msg = await conv.send_message(d_link)
+            await conv.send_message(d_link)
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         await event.client.send_message(event.chat_id, details.message)
