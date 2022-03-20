@@ -169,7 +169,6 @@ async def _(event):
         await edit_or_reply(event, f"~ {response.message.message}")
 
 
-
 @poci_cmd(pattern="view")
 async def _(event):
     reply_message = await event.get_reply_message()
@@ -229,32 +228,6 @@ async def _(event):
         await xx.delete()
 
 
-
-@poci_cmd(pattern="bypasss(?: |$)(.*)")
-async def _(event):
-    if event.fwd_from:
-        return
-    link = event.pattern_match.group(1)
-    firmware = "bypass"
-    web = BYPASS_URL
-    await edit_or_reply(event, "`Processing...`")
-    async with event.client.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=774181428)
-            )
-            await conv.send_message(f"/{firmware} {link}")
-            response = await response
-        except YouBlockedUserError:
-            await event.client(UnblockRequest(chat))
-            await conv.send_message(f"/{firmware} {link}")
-            response = await response
-        else:
-            await event.delete()
-            await event.client.forward_messages(event.chat_id, response.message
-
-
-
 CMD_HELP.update(
     {
         "view": f"**Plugin : **`view`\
@@ -265,8 +238,6 @@ CMD_HELP.update(
 )
 
 
-
-
 CMD_HELP.update(
     {
         "bypass": f"**Plugin : **`bypass`\
@@ -275,7 +246,6 @@ CMD_HELP.update(
     "
     }
 )
-
 
 
 CMD_HELP.update(
@@ -328,7 +298,6 @@ CMD_HELP.update(
     "
     }
 )
-
 
 
 CMD_HELP.update(
