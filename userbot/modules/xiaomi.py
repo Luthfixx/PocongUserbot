@@ -39,7 +39,7 @@ async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group(1)
-    firmware = "bypasss"
+    firmware = "bypass"
     chat = "@JusidamaBot"
     await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
