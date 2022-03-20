@@ -205,9 +205,9 @@ async def _(event):
 async def _(event):
     xxnx = event.pattern_match.group(1).split(" ", 1)[0]
     if xxnx:
-        d_link = xxnx
+        pass
     elif event.is_reply:
-        d_link = await event.get_reply_message()
+        await event.get_reply_message()
     else:
         return await edit_delete(
             event,
