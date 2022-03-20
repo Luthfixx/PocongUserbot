@@ -203,11 +203,11 @@ async def _(event):
 
 @poci_cmd(pattern="bypass(?: |$)(.*)")
 async def _(event):
-    xxnx = event.pattern_match.group(1).split(" ", 1)[0]
+    xxnx = event.pattern_match.group(1)
     if xxnx:
-        pass
+        d_link = xxnx
     elif event.is_reply:
-        await event.get_reply_message()
+        d_link = await event.get_reply_message()
     else:
         return await edit_delete(
             event,
@@ -217,12 +217,16 @@ async def _(event):
     web = BYPASS_URL
     async with event.client.conversation(web) as conv:
         try:
-            await conv.send_message("/bypass {d_link}")
+          if level:
+                m = f"/bypass {d_link}"
+                bypass_level = await conv.send_message("/bypass {d_link}")
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.client(UnblockRequest(web))
-            await conv.send_message("/bypass {d_link}")
+           await event.client(UnblockRequest(web))
+           if level:
+                 m = f"/bypass {d_link}"
+                 bypass_level = await conv.send_message(m)
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         await event.client.send_message(event.chat_id, details.message)
