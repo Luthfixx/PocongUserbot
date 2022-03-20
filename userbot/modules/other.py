@@ -203,7 +203,7 @@ async def _(event):
 
 @poci_cmd(pattern="bypass(?: |$)(.*)")
 async def _(event):
-    xxnx = event.pattern_match.group(1)
+    xxnx = event.pattern_match.group(2)
     if xxnx:
         d_link = xxnx
     elif event.is_reply:
