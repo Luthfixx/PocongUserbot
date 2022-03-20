@@ -203,21 +203,25 @@ async def _(event):
 
 @poci_cmd(pattern="bypass(?: |$)(.*)")
 async def _(event):
-    xxnx = event.pattern_match.group(2)
-    if xxnx:
-        d_link = xxnx
-    elif event.is_reply:
-        d_link = await event.get_reply_message()
+    xx = await edit_or_reply(fry, "`Melakukan bypass..`")
+    url = event.pattern_match.group(2)
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await edit_delete(xx, "**Silahkan Balas Ke Media Foto**")
+        return
+    reply_message = await event.get_reply_message()
     else:
         return await edit_delete(
             event,
             "**Mohon berikan link valid..**",
         )
+    return
     xx = await edit_or_reply(event, "`Melakukan direct link...`")
     web = BYPASS_URL
     async with event.client.conversation(web) as conv:
         try:
-            await conv.send_message("/bypass {d_link}")
+            await conv.send_message("/bypass {url}")
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
