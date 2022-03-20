@@ -203,7 +203,7 @@ async def _(event):
 
 @poci_cmd(pattern="bypass(?: |$)(.*)")
 async def _(event):
-    level = fry.pattern_match.group(2)
+    fry.pattern_match.group(2)
     return
     xx = await edit_or_reply(event, "`Melakukan direct link...`")
     web = BYPASS_URL
