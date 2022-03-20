@@ -230,6 +230,31 @@ async def _(event):
 
 
 
+@poci_cmd(pattern="bypass1(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    link = event.pattern_match.group(1)
+    firmware = "bypass"
+    web = BYPASS_URL
+    await edit_or_reply(event, "`Processing...`")
+    async with event.client.conversation(chat) as conv:
+        try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=774181428)
+            )
+            await conv.send_message(f"/{firmware} {link}")
+            response = await response
+        except YouBlockedUserError:
+            await event.client(UnblockRequest(chat))
+            await conv.send_message(f"/{firmware} {link}")
+            response = await response
+        else:
+            await event.delete()
+            await event.client.forward_messages(event.chat_id, response.message
+
+
+
 CMD_HELP.update(
     {
         "view": f"**Plugin : **`view`\
