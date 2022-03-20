@@ -230,7 +230,7 @@ async def _(event):
 
 
 
-@poci_cmd(pattern="bypass1(?: |$)(.*)")
+@poci_cmd(pattern="bypasss(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
