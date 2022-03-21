@@ -40,17 +40,17 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     well = "bypass"
-    chat = "@JusidamaBot"
+    chat = "@ATBYPASSBOT"
     xx = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/{well} {link}")
-            await conv.get_response()
+            text = await conv.get_response()
             response = await conv.get_response()
         except YouBlockedUserError:
             await event.client(UnblockRequest(chat))
             await conv.send_message(f"/{well} {link}")
-            await conv.get_response()
+            text = await conv.get_response()
             response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
         await event.client.send_message(event.chat_id, response.message)
