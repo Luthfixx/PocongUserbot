@@ -44,17 +44,14 @@ async def _(event):
     await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=774181428)
-            )
             await conv.send_message(f"/{well} {link}")
-            response = await response
+            response = await conv.get_response()
         except YouBlockedUserError:
             await event.client(UnblockRequest(chat))
             await conv.send_message(f"/{well} {link}")
-            response = await response
+            response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
-        await event.client.send_message(event.chat_id, details.message)
+        await event.client.send_message(event.chat_id, response.message)
         await xx.delete()
 
 @poci_cmd(pattern="fastboot(?: |$)(.*)")
