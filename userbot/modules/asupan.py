@@ -4,12 +4,12 @@
 import requests
 import random
 from userbot import CMD_HANDLER as cmd
-from userbot import CMD_HELP
+from userbot import CMD_HELP, WEB_API
 from userbot.utils import poci_cmd
 from telethon.tl.types import InputMessagesFilterVideo
 
 
-@poci_cmd(pattern="asupan$")
+@poci_cmd(pattern="tiktok$")
 async def _(event):
     try:
         asupannya = [
@@ -39,14 +39,14 @@ async def _(event):
         await event.edit("**Tidak bisa menemukan video wibu.**")
 
 
-@poci_cmd(pattern="chika$")
+@poci_cmd(pattern="asupan$")
 async def _(event):
     try:
-        response = requests.get("https://api-alphabot.herokuapp.com/api/asupan/chika?apikey=Alphabot").json()
-        await event.client.send_file(event.chat_id, response["url"])
+        response = requests.get(WEB_API).json()
+        await event.client.send_file(event.chat_id, response["result"])
         await event.delete()
     except Exception:
-        await event.edit("**Tidak bisa menemukan video chikakiku.**")
+        await event.edit("**Tidak bisa menemukan video asupan.**")
 
 
 CMD_HELP.update(
