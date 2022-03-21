@@ -34,12 +34,12 @@ async def _(event):
 
 
 
-@poci_cmd(pattern="byepass(?: |$)(.*)")
+@poci_cmd(pattern="gas(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group(1)
-    firmware = "bypass"
+    well = "bypass"
     chat = "@JusidamaBot"
     await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
@@ -47,16 +47,15 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=774181428)
             )
-            await conv.send_message(f"/{firmware} {link}")
+            await conv.send_message(f"/{well} {link}")
             response = await response
         except YouBlockedUserError:
             await event.client(UnblockRequest(chat))
-            await conv.send_message(f"/{firmware} {link}")
+            await conv.send_message(f"/{well} {link}")
             response = await response
-        else:
-            await event.delete()
-            await event.client.forward_messages(event.chat_id, response.message)
-
+        await event.client.send_read_acknowledge(conv.chat_id)
+        await event.client.send_message(event.chat_id, details.message)
+        await xx.delete()
 
 @poci_cmd(pattern="fastboot(?: |$)(.*)")
 async def _(event):
