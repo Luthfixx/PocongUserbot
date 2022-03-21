@@ -213,7 +213,7 @@ async def _(event):
             "**Mohon berikan link valid..**",
         )
     xx = await edit_or_reply(event, "`Melakukan direct link...`")
-    web = BYPASS_URL
+    web = "@bypassvip_bot"
     async with event.client.conversation(web) as conv:
         try:
             await conv.send_message(d_link)
