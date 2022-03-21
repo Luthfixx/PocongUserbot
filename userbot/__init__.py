@@ -149,7 +149,7 @@ CHANNEL = os.environ.get("CHANNEL", "PocongProject")
 # Heroku Credentials for updater.
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
-
+WEB_API = os.environ.get("WEB_API", None)
 # JustWatch Country
 WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", "ID")
 
