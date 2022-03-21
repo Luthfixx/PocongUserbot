@@ -53,7 +53,7 @@ async def _(event):
             await conv.get_response()
             response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
-        await event.client.send_message(event.chat_id, response.message)
+        await event.client.forward_messages(event.chat_id, response.message)
         await xx.delete()
 
 @poci_cmd(pattern="fastboot(?: |$)(.*)")
