@@ -46,7 +46,10 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["result"])
         await event.delete()
     except Exception:
-        await event.edit("**Tidak bisa menemukan video asupan.**")
+        await event.edit("**Tidak dapat menemukan video .**")
+
+
+
 
 
 CMD_HELP.update(
