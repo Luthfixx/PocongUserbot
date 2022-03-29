@@ -1,9 +1,9 @@
 FROM luthfixx/poconguserbot:buster
 
-RUN git clone -b main https://github.com/Luthfixx/PocongUserbot /home/PocongUserbot/ \
-    && chmod 777 /home/PocongUserbot \
-    && mkdir /home/PocongUserbot/bin/
+RUN git clone -b main https://github.com/Luthfixx/PocongUserbot /home/poconguserbot/ \
+    && chmod 777 /home/poconguserbot \
+    && mkdir /home/poconguserbot/bin/
 
-WORKDIR /home/PocongUserbot/
+WORKDIR /home/poconguserbot/
 
 CMD [ "bash", "start" ]
