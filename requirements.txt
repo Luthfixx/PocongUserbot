@@ -1,4 +1,5 @@
 aiofiles
+pururin
 aiohttp[speedups]
 async_generator
 asyncurban
